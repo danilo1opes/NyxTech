@@ -1,0 +1,14 @@
+import React from 'react';
+
+interface IDateInput extends React.ComponentProps<'input'> {
+  label: string;
+}
+
+export const DateInput = ({ label, ...props }: IDateInput) => {
+  return (
+    <div>
+      <label htmlFor={label}>{label}</label>
+      <input type="date" id={label} name={label} {...props} />
+    </div>
+  );
+};
