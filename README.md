@@ -1,69 +1,82 @@
-# React + TypeScript + Vite
+# NyxTech - Dashboard de Vendas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Um dashboard responsivo para análise de vendas, desenvolvido em **React** com **TypeScript** como projeto de aprendizagem.
 
-Currently, two official plugins are available:
+## 📊 Sobre o Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O **NyxTech** é uma aplicação web que consome uma API de vendas e apresenta os dados de forma organizada. O projeto foi desenvolvido com foco no aprendizado de TypeScript, demonstrando conceitos como tipagem estática, interfaces, hooks customizados e gerenciamento de estado.
 
-## Expanding the ESLint configuration
+## 🚀 Funcionalidades
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 📈 Dashboard Principal (Resumo)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Total de Vendas**: Soma de todas as vendas excluindo falhas
+- **Valores Recebidos**: Total de vendas com status "pago"
+- **Em Processamento**: Total de vendas com status "processando"
+- **Gráfico de Vendas**: Visualização temporal das vendas por status usando Recharts
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 💰 Gestão de Vendas
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Lista de Vendas**: Visualização completa de todas as transações
+- **Detalhes da Venda**: Página individual com informações detalhadas de cada venda
+- **Filtros por Período**: Seleção de datas início/fim para análise específica
+- **Navegação por Meses**: Botões para navegar rapidamente entre meses
+
+### 🎯 Recursos Técnicos
+
+- **Roteamento**: Navegação SPA com React Router
+- **Estados de Loading**: Indicadores visuais durante carregamento
+- **Gerenciamento de Estado**: Context API para compartilhamento de dados
+- **Hook Customizado**: `useFetch` para requisições HTTP
+- **Componentes Tipados**: Interfaces TypeScript para type safety
+
+## 🛠️ Tecnologias Utilizadas
+
+- **React 18** - Biblioteca para interfaces de usuário
+- **TypeScript** - Superset JavaScript com tipagem estática
+- **React Router DOM** - Roteamento para SPA
+- **Recharts** - Biblioteca para gráficos responsivos
+- **CSS Custom Properties** - Variáveis CSS para tema consistente
+
+## 🔄 API e Tipos de Dados
+
+O projeto consome dados da API `https://data.origamid.dev/vendas/` com a seguinte estrutura:
+
+```typescript
+interface IVenda {
+  id: string;
+  nome: string;
+  preco: number;
+  status: 'pago' | 'processando' | 'falha';
+  pagamento: 'boleto' | 'pix' | 'cartao';
+  data: string;
+  parcelas: number | null;
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🎨 Design System
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+O projeto utiliza um sistema de design baseado em CSS Custom Properties:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Cores**: Variáveis `--color-1` a `--color-4` para consistência visual
+- **Espaçamentos**: Sistema de gaps com `--gap` e `--gap-s`
+- **Componentes**: Classes utilitárias como `.box`, `.flex`, `.mb`
+
+## 🔧 Conceitos TypeScript Aplicados
+
+- **Interfaces**: Definição de contratos para dados da API
+- **Generic Types**: Hook `useFetch<T>` reutilizável para diferentes tipos
+- **Utility Types**: `Omit<IVenda, 'data'>` para modificar interfaces existentes
+- **Union Types**: Status e métodos de pagamento com valores específicos
+- **Type Safety**: Validação em tempo de compilação
+
+## 💡 Aprendizados Principais
+
+1. **Gerenciamento de Estado Global**: Context API para compartilhar dados de vendas
+2. **Custom Hooks**: Abstração de lógica de fetch em hook reutilizável
+3. **Type Safety**: Prevenção de erros com tipagem estática
+4. **Performance**: Uso de AbortController para cancelar requisições
+5. **UX**: Estados de loading e tratamento de erros
+6. **Organização**: Separação clara entre componentes, páginas e utilitários
+
+**NyxTech** - Desenvolvido como projeto de aprendizagem em React e TypeScript 🚀
