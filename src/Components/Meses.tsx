@@ -1,5 +1,5 @@
 import React from 'react';
-import { MesBtn } from './MesBtn';
+import MesBtn from './MesBtn';
 
 export const Meses = () => {
   return (
