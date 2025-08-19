@@ -1,7 +1,7 @@
 import React from 'react';
 import useFetch from '../Hooks/useFetch';
 
-type IDataContext = {
+interface IDataContext {
   data: IVenda[] | null;
   loading: boolean;
   error: string | null;
@@ -9,9 +9,9 @@ type IDataContext = {
   final: string;
   setInicio: React.Dispatch<React.SetStateAction<string>>;
   setFinal: React.Dispatch<React.SetStateAction<string>>;
-};
+}
 
-export type IVenda = {
+export interface IVenda {
   id: string;
   nome: string;
   preco: number;
@@ -19,7 +19,7 @@ export type IVenda = {
   pagamento: 'boleto' | 'pix' | 'cartao';
   data: string;
   parcelas: number | null;
-};
+}
 
 const DataContext = React.createContext<IDataContext | null>(null);
 
